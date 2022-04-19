@@ -77,10 +77,46 @@ body {
     margin-top: 100px;
     text-align: center;
     padding: 10px;
+    cursor: pointer;
 }
 
 #startButton {
     padding: 10px;
     color: white;
     background-color: #603A03;
+}
+
+@keyframes play {
+    from {
+        background-position: 0px;
+    }
+
+    to {
+        background-position: -512px;
+    }
+}
+
+.animation1 {
+    background-image: url(../src/imgs/apache.png);
+    animation: play .5s steps(2) infinite;
+}
+
+.animation2 {
+    background-image: url(../src/imgs/inimigo1.png);
+    animation: play .5s steps(2) infinite;
+}
+
+@keyframes play-2 {
+    from {
+        background-position: 0px;
+    }
+
+    to {
+        background-position: -528px;
+    }
+}
+
+.animation3 {
+    background-image: url(../src/imgs/amigo.png);
+    animation: play-2 .5s steps(6) infinite;
 }
