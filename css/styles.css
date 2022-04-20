@@ -120,3 +120,10 @@ body {
     background-image: url(../src/imgs/amigo.png);
     animation: play-2 .5s steps(6) infinite;
 }
+
+#bullet {
+    width: 50px;
+    height: 8px;
+    position: absolute;
+    background-image: url(../src/imgs/disparo.png);
+}
