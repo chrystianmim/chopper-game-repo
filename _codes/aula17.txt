@@ -79,7 +79,7 @@ var colisao6 = ($("#inimigo2").collision($("#amigo")));
 
 ***** js.js *****
 
-//Explosão2
+//Explosï¿½o2
 	
 	function explosao2(inimigo2X,inimigo2Y) {
 	
@@ -101,7 +101,7 @@ var colisao6 = ($("#inimigo2").collision($("#amigo")));
 		}
 		
 		
-	} // Fim da função explosao2()
+	} // Fim da funï¿½ï¿½o explosao2()
 
 
 ***** js.js *****
@@ -147,6 +147,6 @@ var colisao6 = ($("#inimigo2").collision($("#amigo")));
 		
 	}
 	
-} // Fim da função reposicionaAmigo()
+} // Fim da funï¿½ï¿½o reposicionaAmigo()
 
 
