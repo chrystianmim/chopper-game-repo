@@ -6,6 +6,8 @@ function start() {
     $("#background").append("<div id='enemy1' class='animation2'></div>");
     $("#background").append("<div id='enemy2'></div>");
     $("#background").append("<div id='friend' class='animation3'></div>");
+    $("#background").append("<div id='scoreboard'></div>");
+    $("#background").append("<div id='energy'></div>");
 
     const game = {};
     const keys = {
@@ -19,6 +21,10 @@ function start() {
     let letPlayerFire = true;
     let enemy1PosY = parseInt(Math.random() * 334);
     let endGame = false;
+    let earnedPoints = 0;
+    let friendLosses = 0;
+    let friendSaves = 0;
+    let currentEnergy = 3;
 
     game.keyPressed = []; // check if player pressed a key
 
@@ -41,6 +47,8 @@ function start() {
         moveEnemy2();
         moveFriend();
         coll();
+        scoreboard();
+        energy();
     }
 
     function bgMovement() { // Function that moves the background
@@ -147,6 +155,7 @@ function start() {
 
         // Collision player + enemy1
         if (collision1.length > 0) {
+            currentEnergy--;
             enemy1PosX = parseInt($("#enemy1").css("left"));
             enemy1PosY = parseInt($("#enemy1").css("top"));
 
@@ -159,6 +168,7 @@ function start() {
 
         // Collision player + enemy2
         if (collision2.length > 0) {
+            currentEnergy--;
             enemy2PosX = parseInt($("#enemy2").css("left"));
             enemy2PosY = parseInt($("#enemy2").css("top"));
 
@@ -171,6 +181,8 @@ function start() {
 
         // Collision bullet + enemy1
         if (collision3.length > 0) {
+            earnedPoints += 100;
+            enemy1Speed += 0.2;
             enemy1PosX = parseInt($("#enemy1").css("left"));
             enemy1PosY = parseInt($("#enemy1").css("top"));
 
@@ -184,6 +196,7 @@ function start() {
 
         // Collision bullet + enemy2
         if (collision4.length > 0) {
+            earnedPoints += 50;
             enemy2PosX = parseInt($("#enemy2").css("left"));
             enemy2PosY = parseInt($("#enemy2").css("top"));
 
@@ -197,10 +210,26 @@ function start() {
 
         // Collision player + friend
         if (collision5.length > 0) {
+            friendSaves++;
             resetFriend();
             $("#friend").remove();
         }
+
+        // Collision friend + enemy2
+
+        if (collision6.length > 0) {
+            friendLosses++;
+            friendPosX = parseInt($("#friend").css("left"));
+            friendPosY = parseInt($("#friend").css("top"));
+
+            explosion3(friendPosX, friendPosY);
+            $("#friend").remove();
+
+            resetFriend();
+        }
     }
+
+    // explosion functions
 
     function explosion1(enemy1PosX, enemy1PosY) { // Explosion effect for player + enemy1 collision
         $("#background").append("<div id='explosion1'></div");
@@ -238,8 +267,22 @@ function start() {
         }
     }
 
-    function resetEnemy2() { // Reset enemy2 position after collision
+    function explosion3(friendPosX, friendPosY) { // Explosion effect for friend + enemy2 collision
+        $("#background").append("<div id='explosion3' class='animation4'></div");
+        div3 = $("#explosion3");
+        div3.css("top", friendPosY);
+        div3.css("left", friendPosX);
 
+        var explosionTimer3 = window.setInterval(removeExplosion3, 1000);
+
+        function removeExplosion3() {
+            div3.remove();
+            window.clearInterval(explosionTimer3);
+            explosionTimer3 = null;
+        }
+    }
+
+    function resetEnemy2() { // Reset enemy2 position after collision
         var collisionTimer4 = window.setInterval(reset4, 5000);
 
         function reset4() {
@@ -262,6 +305,36 @@ function start() {
             if (endGame === false) {
                 $("#background").append("<div id='friend' class='animation3'></div>");
             }
+        }
+    }
+
+    function scoreboard() { // Scoreboard function	
+        $("#scoreboard").html("<h2> Score: " + earnedPoints + " Saves: " + friendSaves + " Losses: " + friendLosses + "</h2>");
+
+    }
+
+    function energy() {
+
+        if (currentEnergy === 3) {
+
+            $("#energy").css("background-image", "url(../src/imgs/energia3.png)");
+        }
+
+        if (currentEnergy === 2) {
+
+            $("#energy").css("background-image", "url(../src/imgs/energia2.png)");
+        }
+
+        if (currentEnergy === 1) {
+
+            $("#energy").css("background-image", "url(../src/imgs/energia1.png)");
+        }
+
+        if (currentEnergy === 0) {
+
+            $("#energy").css("background-image", "url(../src/imgs/energia0.png)");
+
+            // Game Over
         }
     }
 }

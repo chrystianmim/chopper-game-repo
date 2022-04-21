@@ -121,6 +121,23 @@ body {
     animation: play-2 .5s steps(6) infinite;
 }
 
+@keyframes play-3 {
+    from {
+        background-position: 0px;
+    }
+
+    to {
+        background-position: -308px;
+    }
+}
+
+.animation4 {
+    width: 44px;
+    height: 51px;
+    background-image: url(../src/imgs/amigo_morte.png);
+    animation: play-3 .5s steps(7) infinite;
+}
+
 #bullet {
     width: 50px;
     height: 8px;
@@ -138,4 +155,32 @@ body {
     width: 15px;
     height: 87px;
     position: absolute;
+}
+
+#explosion3 {
+    width: 44px;
+    height: 51px;
+    position: absolute;
+}
+
+#scoreboard {
+    width: 450px;
+    height: 50px;
+    position: absolute;
+    left: 5px;
+    top: 590px;
+}
+
+h2 {
+    font-family: Titulo;
+    font-size: 20px;
+    color: #FFF;
+}
+
+#energy {
+    width: 140px;
+    height: 38px;
+    position: absolute;
+    left: 750px;
+    top: 7px;
 }
